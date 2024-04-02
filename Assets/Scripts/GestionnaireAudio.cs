@@ -6,23 +6,30 @@ public class GestionnaireAudio : MonoBehaviour
 {
     [SerializeField] private AudioMixer audioMixer;
     [SerializeField] private Slider glissiereVolumeMusique;
+    [SerializeField] private Slider glissiereVolumeFX;
+
+    private AudioSource audioSource;
 
 
     void Start(){
 
-        audioMixer.SetFloat("VolumeMusique", -10f);
+        // meme chose que dutuliser serializedfield et de drag le component dans unity
+        audioSource = GetComponent<AudioSource>();
+        //audioMixer.SetFloat("VolumeMusique", -10f);
         //audioMixer.GetFloat("VolumeMusique", );
 
-    }
-
-    void Update(){
-        
     }
 
     public void AjustementVolumeMusique(float volume){
 
         audioMixer.SetFloat("VolumeMusique", ConvertionLineaireALogarithmique(volume));
 
+    }
+
+    public void AjustementVolumeFX(float volume){
+
+        audioMixer.SetFloat("VolumeFX", ConvertionLineaireALogarithmique(volume));
+        audioSource.Play();
 
     }
 
