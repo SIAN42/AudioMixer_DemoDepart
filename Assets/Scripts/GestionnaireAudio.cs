@@ -1,18 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class GestionnaireAudio : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Slider glissiereVolumeMusique;
+
+
+    void Start(){
+
+        audioMixer.SetFloat("VolumeMusique", -10f);
+        //audioMixer.GetFloat("VolumeMusique", );
+
+    }
+
+    void Update(){
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void AjustementVolumeMusique(float volume){
+
+        audioMixer.SetFloat("VolumeMusique", ConvertionLineaireALogarithmique(volume));
+
+
     }
+
+    private float ConvertionLineaireALogarithmique(float volume){
+
+        return Mathf.Log10(volume) * 20;
+
+    }
+
 }
